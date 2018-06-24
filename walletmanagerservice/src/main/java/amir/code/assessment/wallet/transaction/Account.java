@@ -29,6 +29,13 @@ class Account {
         return balance;
     }
 
+    /**
+     *
+     * @param funds .
+     * @return
+     *  return 0: if credited successfully
+     *  return -1: if funds is NOT a non-zero positive number
+     */
     synchronized int credit(BigDecimal funds) {
         if (funds.compareTo(BigDecimal.ZERO) > 0) {
             balance = balance.add(funds, MathContext.UNLIMITED);
@@ -37,6 +44,14 @@ class Account {
         return -1;
     }
 
+    /**
+     *
+     * @param funds .
+     * @return
+     *  return 0: if debited successfully
+     *  return -1: if funds is NOT a non-zero positive number
+     *  return -2: if not enough money exist to debit expected amount of funds
+     */
     synchronized int debit(BigDecimal funds) {
         if (funds.compareTo(BigDecimal.ZERO) > 0) {
             BigDecimal futureBalance = balance.subtract(funds);
